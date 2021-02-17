@@ -59,7 +59,7 @@ sdk: deps
 .PHONY: docker
 docker: deps
 		packr
-		GO111MODULE=on GOOS=linux GOARCH=amd64 go build
+		CGO_ENABLED=0 GO111MODULE=on GOOS=linux GOARCH=amd64 go build -ldflags '-w -extldflags "-static"'
 		docker build -t oryd/keto:latest .
 		rm keto
 		packr clean
